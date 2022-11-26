@@ -20,7 +20,8 @@ module Twilio
       end
 
       def _request(request)
-        @connection = Faraday.new(url: request.host + ':' + request.port.to_s, ssl: { verify: true }) do |f|
+        twilio_url = 'https://' + request.host + ':' + request.port.to_s
+        @connection = Faraday.new(url: twilio_url, ssl: { verify: true }) do |f|
           f.options.params_encoder = Faraday::FlatParamsEncoder
           f.request :url_encoded
           f.adapter @adapter
